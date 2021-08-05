@@ -1,0 +1,591 @@
+{
+	"info": {
+		"_postman_id": "7df1b51e-8536-46e0-999f-1563f1f1e19a",
+		"name": "Interview",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "with_CityName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?q=Phoenix&appid=44ee963ea8384bd561e7cce2a9b68f08",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Phoenix"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with_CityID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?id=4905873&appid=44ee963ea8384bd561e7cce2a9b68f08",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "4905873"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with_geographic_coordinates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?lat=41.611149&lon=-87.634773&appid=44ee963ea8384bd561e7cce2a9b68f08",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "41.611149"
+						},
+						{
+							"key": "lon",
+							"value": "-87.634773"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with_zipcode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?zip=85001&appid=44ee963ea8384bd561e7cce2a9b68f08",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "zip",
+							"value": "85001"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with_Cities in circle",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?lat=41.611149&appid=44ee963ea8384bd561e7cce2a9b68f08&lon=-87.634773&cnt=10",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "lat",
+							"value": "41.611149"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						},
+						{
+							"key": "lon",
+							"value": "-87.634773"
+						},
+						{
+							"key": "cnt",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "with_Cities_within a rectangle zone",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"try{",
+							"     var data = JSON.parse(responseBody); ",
+							"    }",
+							"    catch(e)",
+							"    {",
+							"        pm.test(\"Error in Response Body\", function () {",
+							"        pm.expect(pm.response.text()).to.include(\"\\\"cod\\\": 200\");",
+							"        });",
+							"         ",
+							"        return;",
+							"    }",
+							"for (key in data){",
+							"  if((key == \"id\") || (key == \"visibility\") || (key== \"deg\") ||(key == \"all\") ",
+							"  ||(key == \"pressure\") ||(key == \"humidity\") ||(key == \"dt\") ||(key == \"type\")",
+							"  ||(key == \"sunrise\") ||(key == \"sunset\") ||(key == \"cod\") ||(key == \"timezone\") )",
+							"    {",
+							"        if(typeof(data[key])!= \"number\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"number\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"lon\") || (key== \"lat\") || (key== \"temp\") || (key== \"feels_like\")",
+							"    || (key== \"temp_min\") || (key== \"temp_max\") || (key== \"speed\") || (key== \"gust\"))",
+							"    {",
+							"        if(typeof(data[key])!= \"float\")",
+							"        {",
+							"            tests[key+\" is not a Number\"] = typeof(data[key]) === \"float\"; ",
+							"        }",
+							"    }",
+							"    else if((key== \"wind\") || (key== \"clouds\") || (key== \"sys\")  || (key== \"coord\")",
+							"     || (key== \"weather\") || (key== \"main\") )",
+							"    {",
+							"        continue;",
+							"    }",
+							"    else{",
+							"        if(typeof(data[key])!= \"string\")",
+							"        {",
+							"            tests[key+\" is not a string\"] = typeof(data[key]) === \"string\";",
+							"        }",
+							"    }",
+							"}",
+							"",
+							"pm.test(\"Body matches string\", function () ",
+							"{",
+							"    pm.expect(pm.response.text()).to.include(\"weather\",\"clouds\",\"coord\",\"main\",\"visibility\",",
+							"    \"wind\",\"speed\",\"deg\",\"clouds\",\"sys\",\"timezone\",\"id\",\"name\",\"cod\");",
+							"});",
+							"pm.test(\"Response time is less than 500 MS\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//command newman run Json path",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "api.openweathermap.org/data/2.5/weather?bbox=[lon-lef]&appid=44ee963ea8384bd561e7cce2a9b68f08",
+					"host": [
+						"api",
+						"openweathermap",
+						"org"
+					],
+					"path": [
+						"data",
+						"2.5",
+						"weather"
+					],
+					"query": [
+						{
+							"key": "bbox",
+							"value": "[lon-lef]"
+						},
+						{
+							"key": "appid",
+							"value": "44ee963ea8384bd561e7cce2a9b68f08"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
